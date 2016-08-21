@@ -36,12 +36,17 @@ class InputDeviceDispatcher(file_dispatcher):
                  speed *= -1
                  eh.motor.two.speed(speed)
 
+dev = None
 
 #find device
 devices = [InputDevice(fn) for fn in list_devices()]
 for device in devices:
     if device.name == 'Microsoft X-Box 360 pad':
         dev = InputDevice(device.fn)
+
+if dev is None:
+    print "No Joypad found :("
+    quit()
 
 InputDeviceDispatcher(dev)
 loop()
